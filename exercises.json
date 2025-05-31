@@ -36,5 +36,130 @@
       }
     ],
     "model_solution": "#include <stdio.h>\n#include <string.h>\n\nint main() {\n  char alice_msg[101];\n  scanf(\"%s\", alice_msg);\n  \n  int num_e_alice = strlen(alice_msg) - 2;\n  int num_e_bob = num_e_alice * 2;\n  \n  printf(\"h\");\n  for (int i = 0; i < num_e_bob; i++) {\n    printf(\"e\");\n  }\n  printf(\"y\\n\");\n  \n  return 0;\n}"
+  },
+  {
+    "id": "exercise_3_quick_brown_fox",
+    "title": "[The quick brown fox] Letter Frequency Analysis",
+    "description": "Alice told Bob that in the following sentence, all the letters of the alphabet appear at least once: \"The quick brown fox jumps over the lazy dog\". Bob is not convinced and asks Alice to prove it.\nComplete the following program so that it outputs the frequency of each letter of the alphabet in the sentence given.\n\nHint: Observe that the first letter is uppercase.",
+    "starter_code": "#include <stdio.h>\n#include <ctype.h> // For tolower() and isalpha()\n\n#define ALPH_SIZE 26\n\nint main() {\n    char str[] = \"The quick brown fox jumps over the lazy dog\";\n    int freq[ALPH_SIZE] = {0};\n\n    /* Your logic here */\n    // Iterate through str. For each character:\n    // 1. Convert to lowercase if it's an alphabet character.\n    // 2. If it's a lowercase alphabet character ('a' through 'z'),\n    //    increment the corresponding counter in freq.\n    //    (e.g., freq[character - 'a']++)\n\n\n    /* Output */\n    for (int i = 0; i < 26; ++i) {\n        printf(\"%c: %d\\n\", 'a' + i, freq[i]);\n    }\n    return 0;\n}",
+    "test_cases": [
+      {
+        "input": "",
+        "expected_output": "a: 1\nb: 1\nc: 1\nd: 1\ne: 3\nf: 1\ng: 1\nh: 2\ni: 1\nj: 1\nk: 1\nl: 1\nm: 1\nn: 1\no: 4\np: 1\nq: 1\nr: 2\ns: 1\nt: 2\nu: 2\nv: 1\nw: 1\nx: 1\ny: 1\nz: 1\n"
+      }
+    ],
+    "model_solution": "#include <stdio.h>\n#include <ctype.h> // For tolower() and isalpha()\n\n#define ALPH_SIZE 26\n\nint main() {\n    char str[] = \"The quick brown fox jumps over the lazy dog\";\n    int freq[ALPH_SIZE] = {0};\n    int i = 0;\n\n    while (str[i] != '\\0') {\n        char currentChar = str[i];\n        if (isalpha(currentChar)) { // Check if it's an alphabet character\n            currentChar = tolower(currentChar); // Convert to lowercase\n            freq[currentChar - 'a']++;\n        }\n        i++;\n    }\n\n    for (int i = 0; i < 26; ++i) {\n        printf(\"%c: %d\\n\", 'a' + i, freq[i]);\n    }\n    return 0;\n}"
+  },
+  {
+    "id": "exercise_4_palindrome_count",
+    "title": "[Palindrome] Count Palindromes in a List",
+    "description": "Alice recently discovered a passion for words. She knows that a palindrome is a word that reads the same way from left to right and from right to left. For example, \"radar\", \"kayak\" are palindromes. Given a small list of words, help Alice count the number of palindromes in this list.\nComplete the following program so that it displays the number of palindromes in the list of words.",
+    "starter_code": "#include <stdio.h>\n/* Include the necessary header file(s) e.g. for strlen and boolean types */\n// #include <string.h>\n// #include <stdbool.h>\n\n#define N 10\n#define STR_SIZE 100\n\n// You might want to define a helper function here, e.g.:\n// bool is_palindrome(char* word) { ... }\n\nint main() {\n    char words[N][STR_SIZE + 1] = {\n        \"radar\",\n        \"kayak\",\n        \"hello\",\n        \"world\",\n        \"madam\",\n        \"racecar\",\n        \"civic\",\n        \"level\",\n        \"rotor\",\n        \"noon\"\n    };\n    int palindrome_count = 0;\n\n    /* Your logic here */\n    // Iterate through the 'words' array.\n    // For each word, check if it's a palindrome.\n    // If it is, increment palindrome_count.\n    \n\n    /* Output */\n    printf(\"Number of palindromes: %d\\n\", palindrome_count /* your variable here */);\n    return 0;\n}",
+    "test_cases": [
+      {
+        "input": "",
+        "expected_output": "Number of palindromes: 8\n"
+      }
+    ],
+    "model_solution": "#include <stdio.h>\n#include <string.h>   // For strlen\n#include <stdbool.h>  // For bool type\n\n#define N 10\n#define STR_SIZE 100\n\n// Function to check if a string is a palindrome\nbool is_palindrome(char* word) {\n    int len = strlen(word);\n    if (len == 0) return true; // An empty string can be considered a palindrome\n    \n    int start = 0;\n    int end = len - 1;\n    while (start < end) {\n        if (word[start] != word[end]) {\n            return false;\n        }\n        start++;\n        end--;\n    }\n    return true;\n}\n\nint main() {\n    char words[N][STR_SIZE + 1] = {\n        \"radar\", \"kayak\", \"hello\", \"world\", \"madam\",\n        \"racecar\", \"civic\", \"level\", \"rotor\", \"noon\"\n    };\n    int palindrome_count = 0;\n\n    for (int i = 0; i < N; i++) {\n        if (is_palindrome(words[i])) {\n            palindrome_count++;\n        }\n    }\n\n    printf(\"Number of palindromes: %d\\n\", palindrome_count);\n    return 0;\n}"
+  },
+  {
+    "id": "exercise_5_anagrams",
+    "title": "[Anagrams] Anagram Check",
+    "description": "Alice and Bob like to play a game where they have to find out if two words are anagrams. Two words are anagrams if one can be obtained by rearranging the letters of the other. For example, \"listen\" and \"silent\" are anagrams.\nHelp them write a program that determines if two words are anagrams by completing the following program. The program should display \"YES\" if the words are anagrams and \"NO\" otherwise. We assume that the two words are of the same length and contain only lowercase English letters.",
+    "starter_code": "#include <stdio.h>\n#include <string.h>   // For strlen, if needed (though problem assumes same length)\n// #include <stdbool.h> // If you prefer to use bool type for a helper function\n\n#define STR_SIZE 100\n#define ALPH_SIZE 26\n\n// You might want to define a helper function, e.g.:\n// bool are_anagrams(char* s1, char* s2) { ... }\n\nint main () {\n    char a[STR_SIZE + 1];\n    char b[STR_SIZE + 1];\n\n    scanf(\"%s\", a);\n    scanf(\"%s\", b);\n\n    int is_anagram_flag = 0; // Or use a boolean\n\n    /* Your logic here */\n    // 1. (Optional: Verify lengths are same, though problem states they are)\n    // 2. Create frequency arrays for characters in string 'a' and string 'b'.\n    // 3. Compare the frequency arrays. If all counts match, they are anagrams.\n    // Set is_anagram_flag accordingly.\n    \n\n    /* Output */\n    if (is_anagram_flag /* Your condition here, e.g., based on the flag or function return */) {\n        printf(\"YES\\n\");\n    } else {\n        printf(\"NO\\n\");\n    }\n    return 0;\n}",
+    "test_cases": [
+      {
+        "input": "listen\nsilent",
+        "expected_output": "YES\n"
+      },
+      {
+        "input": "triangle\nintegral",
+        "expected_output": "YES\n"
+      },
+      {
+        "input": "hello\nworld",
+        "expected_output": "NO\n"
+      },
+      {
+        "input": "apple\napply",
+        "expected_output": "NO\n"
+      },
+      {
+        "input": "aabbc\nbacba",
+        "expected_output": "YES\n"
+      }
+    ],
+    "model_solution": "#include <stdio.h>\n#include <string.h>\n#include <stdbool.h>\n\n#define STR_SIZE 100\n#define ALPH_SIZE 26\n\nbool check_anagrams(char* s1, char* s2) {\n    int len1 = strlen(s1);\n    int len2 = strlen(s2);\n\n    // Problem statement assumes same length, but good for robustness\n    if (len1 != len2) {\n        return false;\n    }\n\n    int freq1[ALPH_SIZE] = {0};\n    int freq2[ALPH_SIZE] = {0};\n\n    for (int i = 0; i < len1; i++) {\n        if (s1[i] >= 'a' && s1[i] <= 'z') { // Assuming lowercase English letters\n            freq1[s1[i] - 'a']++;\n        }\n    }\n\n    for (int i = 0; i < len2; i++) {\n        if (s2[i] >= 'a' && s2[i] <= 'z') { // Assuming lowercase English letters\n            freq2[s2[i] - 'a']++;\n        }\n    }\n\n    for (int i = 0; i < ALPH_SIZE; i++) {\n        if (freq1[i] != freq2[i]) {\n            return false;\n        }\n    }\n    return true;\n}\n\nint main () {\n    char a[STR_SIZE + 1];\n    char b[STR_SIZE + 1];\n\n    scanf(\"%s\", a);\n    scanf(\"%s\", b);\n\n    if (check_anagrams(a, b)) {\n        printf(\"YES\\n\");\n    } else {\n        printf(\"NO\\n\");\n    }\n    return 0;\n}"
+  },
+  {
+    "id": "exercise_6_substring_positions",
+    "title": "[Substring Search] Find All Occurrences",
+    "description": "Alice remembers that during a recent programming test, she was asked to write a program that checks if a string sub is a substring of a string s, and that displays the position of the first occurrence in this case. She also remembers that she had passed this exercise easily. This time, she would like to write a program that displays all the positions of the substring sub in the string s. The program will display -1 if the substring is not present in the string.\nAssume that the two strings will have a maximum length of 100 characters, and that s is necessarily longer than sub. Help Alice complete the following program.\n\nExample Output Format:\n- If sub=\"abra\" in s=\"abracadabra\", output: 0 7\n- If sub=\"cad\" in s=\"abracadabra\", output: 4\n- If sub=\"dab\" in s=\"abracadabra\", output: -1",
+    "starter_code": "#include <stdio.h>\n#include <string.h> // For strlen, strncmp\n#include <stdbool.h> // For bool type, if you use it\n\n#define STR_SIZE 100\n\nint main() {\n    char s[STR_SIZE + 1];\n    char sub[STR_SIZE + 1];\n\n    scanf(\"%s\", s);\n    scanf(\"%s\", sub);\n\n    int n = strlen(s);\n    int m = strlen(sub);\n    bool found_match = false;\n\n    /* Your logic here */\n    // Iterate through string 's' with an outer loop (index i from 0 to n-m).\n    // For each position i in 's', check if 'sub' matches s[i...i+m-1].\n    //   You can use strncmp(s + i, sub, m) == 0 for this.\n    // If a match is found:\n    //   If it's not the first match printed, print a space first.\n    //   Print the index i.\n    //   Set found_match to true.\n    \n\n    // After the loop, if no match was found (found_match is still false),\n    // print -1.\n    // Finally, print a newline character. (This means if matches were found,\n    // the newline comes after all printed indices; if -1 was printed, newline after -1).\n\n    if (!found_match) {\n        // This part might be inside or outside your main loop logic conditional on found_match\n    }\n    printf(\"\\n\"); // Ensure one newline at the end of the entire output line.\n\n    return 0;\n}",
+    "test_cases": [
+      {
+        "input": "abracadabra\nabra",
+        "expected_output": "0 7\n"
+      },
+      {
+        "input": "abracadabra\ncad",
+        "expected_output": "4\n"
+      },
+      {
+        "input": "abracadabra\ndab",
+        "expected_output": "-1\n"
+      },
+      {
+        "input": "aaaaa\naa",
+        "expected_output": "0 1 2 3\n"
+      },
+      {
+        "input": "banana\nana",
+        "expected_output": "1 3\n"
+      },
+      {
+        "input": "testing\ntestnotfound",
+        "expected_output": "-1\n"
+      }
+    ],
+    "model_solution": "#include <stdio.h>\n#include <string.h>\n#include <stdbool.h>\n\n#define STR_SIZE 100\n\nint main() {\n    char s[STR_SIZE + 1];\n    char sub[STR_SIZE + 1];\n\n    scanf(\"%s\", s);\n    scanf(\"%s\", sub);\n\n    int n = strlen(s);\n    int m = strlen(sub);\n    bool found_match = false;\n\n    // As per problem: s is necessarily longer than sub. This implies m > 0 and m < n.\n    // If m were 0 (empty sub) or m >= n, this specific problem's assumption is violated.\n    // However, robust code might handle m=0 or m>n explicitly.\n    // For this exercise, we follow the assumption m > 0 and m < n.\n    if (m == 0 || m > n) { // Defensive check, though problem statement implies this won't happen.\n        printf(\"-1\");\n    } else {\n        for (int i = 0; i <= n - m; i++) {\n            if (strncmp(s + i, sub, m) == 0) {\n                if (found_match) { // If this is not the first match\n                    printf(\" \");\n                }\n                printf(\"%d\", i);\n                found_match = true;\n            }\n        }\n        if (!found_match) {\n            printf(\"-1\");\n        }\n    }\n    printf(\"\\n\"); // Single newline at the end of all output.\n\n    return 0;\n}"
+  },
+  {
+    "id": "exercise_7_pied_piper_compression",
+    "title": "[Pied Piper] Run-Length Encoding",
+    "description": "Alice played with this idea of compressing strings. She noticed that in a string, if a character is repeated several times, she can replace it with the character followed by the number of repetitions. For example, the string \"aaabbbcc\" can be compressed to \"a3b3c2\". The compression principle is as follows: each new character encountered is added to the compressed string, and the number of repetitions is added if the character is repeated more than once; otherwise, the character is simply added.\nHelp Alice write a program that takes a string as input and stores the compressed string in another string, and displays this compressed string. Complete the following program.\n\nExamples:\n- Input: \"aaabbbcc\", Output: \"a3b3c2\"\n- Input: \"hello\", Output: \"hel2o\"\n- Input: \"abcde\", Output: \"abcde\"\n- Input: \"aaaaaaaaaa\", Output: \"a10\"",
+    "starter_code": "#include <stdio.h> // For scanf, printf, sprintf\n#include <string.h> // For strlen\n\n#define STR_SIZE 100\n\nint main () {\n    char str[STR_SIZE + 1];\n    char ans[STR_SIZE + 1]; // Compressed string. Ensure it's big enough.\n                            // (Max length of compressed string won't exceed original based on rules)\n\n    scanf(\"%s\", str);\n\n    int str_len = strlen(str);\n    int ans_idx = 0;\n    ans[0] = '\\0'; // Initialize ans as an empty string\n\n    /* Your logic here */\n    // Iterate through 'str' using an index 'i'.\n    // While 'i' is less than str_len:\n    //   Get the current character: char_to_compress = str[i].\n    //   Count consecutive occurrences of char_to_compress starting from 'i'. Let this be 'count'.\n    //   Append char_to_compress to 'ans'.\n    //   If 'count' > 1, convert 'count' to a string and append it to 'ans'. (sprintf can be useful here)\n    //   Advance 'i' by 'count'.\n    // Finally, null-terminate 'ans'.\n    \n\n    printf(\"%s\\n\", ans);\n    return 0;\n}",
+    "test_cases": [
+      {
+        "input": "aaabbbcc",
+        "expected_output": "a3b3c2\n"
+      },
+      {
+        "input": "hello",
+        "expected_output": "hel2o\n"
+      },
+      {
+        "input": "abcde",
+        "expected_output": "abcde\n"
+      },
+      {
+        "input": "wwwwaaadexxxxxxywww",
+        "expected_output": "w4a3dex6yw3\n"
+      },
+      {
+        "input": "aaaaaaaaaa",
+        "expected_output": "a10\n"
+      },
+      {
+        "input": "a",
+        "expected_output": "a\n"
+      },
+      {
+        "input": "",
+        "expected_output": "\n"
+      }
+    ],
+    "model_solution": "#include <stdio.h>\n#include <string.h>\n\n#define STR_SIZE 100\n\nint main () {\n    char str[STR_SIZE + 1];\n    char ans[STR_SIZE + 1]; // Max length of compressed string will not exceed original based on rules.\n\n    scanf(\"%s\", str);\n\n    int len_str = strlen(str);\n    if (len_str == 0) {\n        ans[0] = '\\0';\n        printf(\"%s\\n\", ans);\n        return 0;\n    }\n\n    int i = 0; // index for str\n    int ans_idx = 0; // index for ans\n\n    while (i < len_str) {\n        char current_char = str[i];\n        int count = 0;\n        int j = i;\n        // Count occurrences of current_char\n        while (j < len_str && str[j] == current_char) {\n            count++;\n            j++;\n        }\n\n        // Append the character\n        ans[ans_idx++] = current_char;\n\n        // Append the count if it's greater than 1\n        if (count > 1) {\n            char count_str[10]; // Buffer for count string (e.g., for 100, needs 3 digits + null)\n            sprintf(count_str, \"%d\", count);\n            for (int k = 0; count_str[k] != '\\0'; k++) {\n                ans[ans_idx++] = count_str[k];\n            }\n        }\n        i = j; // Move str index to the next new character or end of string\n    }\n    ans[ans_idx] = '\\0'; // Null-terminate the ans string\n\n    printf(\"%s\\n\", ans);\n    return 0;\n}"
   }
 ]
