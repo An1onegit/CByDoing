@@ -1,0 +1,380 @@
+/* General Reset / Base */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    line-height: 1.6;
+    background-color: #f8f9fa; /* Lighter overall background */
+    color: #212529; /* Darker base text */
+    display: flex;
+    min-height: 100vh;
+    font-size: 16px; /* Base font size */
+}
+
+.page-container {
+    display: flex;
+    width: 100%;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 280px;
+    flex-shrink: 0; /* Prevent sidebar from shrinking */
+    background-color: #e9ecef;
+    padding: 25px 20px;
+    border-right: 1px solid #dee2e6;
+    height: 100vh;
+    overflow-y: auto;
+    position: sticky;
+    top: 0;
+}
+
+.sidebar h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #343a40;
+    font-size: 1.4em;
+    border-bottom: 2px solid #adb5bd;
+    padding-bottom: 10px;
+}
+
+#exercise-list-ul {
+    list-style-type: none;
+}
+
+#exercise-list-ul li {
+    padding: 12px 10px;
+    margin-bottom: 6px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    font-size: 0.95em;
+    border: 1px solid transparent; /* For hover/active state alignment */
+}
+
+#exercise-list-ul li:hover {
+    background-color: #d1d9e0;
+    border-color: #c1c9d0;
+}
+
+#exercise-list-ul li.active-exercise {
+    background-color: #007bff;
+    color: white;
+    font-weight: 500;
+    border-color: #0056b3;
+}
+
+#exercise-list-ul li.completed-exercise::before {
+    content: '✔ ';
+    color: #28a745;
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+#exercise-list-ul li.active-exercise.completed-exercise::before {
+    color: #a2e8b9; /* Lighter green for better contrast on blue */
+}
+
+/* Main Content Styles */
+.main-content {
+    flex-grow: 1;
+    padding: 25px 35px;
+    overflow-y: auto; /* Only if main content itself needs to scroll independently */
+    max-width: calc(100% - 280px); /* Adjust if sidebar width changes */
+}
+
+.main-content header h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-size: 2em;
+}
+
+.exercise-area, .coding-area, .output-area, #solution-display-area {
+    background: #ffffff; /* White background for content cards */
+    margin-bottom: 25px;
+    padding: 20px 25px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05); /* Subtle shadow for depth */
+}
+
+.main-content h2 { /* For exercise title */
+    color: #34495e;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
+
+.main-content h3 { /* For sub-sections like "Your Solution", "Output" */
+    color: #495057;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+#exercise-description {
+    margin-bottom: 20px;
+    color: #343a40;
+}
+
+#starter-code-area {
+    margin-top: 15px;
+}
+
+/* ACE Editor container styling */
+#code-editor-container {
+    border: 1px solid #ced4da; /* Slightly darker border for editor */
+    border-radius: 4px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);
+    min-height: 300px; /* Default editor height */
+    margin-bottom: 15px; /* Space before buttons */
+}
+
+.ace_editor { /* Targeting Ace's own class */
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;
+    font-size: 14px !important;
+}
+
+.editor-controls {
+    margin-bottom: 10px;
+}
+
+button {
+    display: inline-block;
+    font-weight: 500;
+    background-color: #007bff; /* Consistent primary blue */
+    color: #fff;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-top: 5px; /* Reduced top margin for buttons in a row */
+    transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    font-size: 0.95em;
+}
+button:hover {
+    background-color: #0056b3;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+button:disabled {
+    background-color: #6c757d; /* Bootstrap secondary/disabled grey */
+    cursor: not-allowed;
+    opacity: 0.65;
+    box-shadow: none;
+}
+
+#submit-button { background-color: #28a745; /* Green for submit/run */ }
+#submit-button:hover { background-color: #1e7e34; }
+
+#reset-code-button { background-color: #ffc107; color: #212529; /* Yellow with dark text */ }
+#reset-code-button:hover { background-color: #e0a800; }
+
+#show-solution-button { background-color: #17a2b8; /* Info blue */ }
+#show-solution-button:hover { background-color: #117a8b; }
+
+#loading-spinner {
+    font-style: italic;
+    color: #495057;
+    vertical-align: middle; /* Align with buttons better */
+}
+
+/* Output Area Specifics */
+#output-display p { /* For initial message or simple text status */
+    color: #495057;
+    font-style: italic;
+}
+
+/* Status message styling in the H3 of output area */
+.output-area h3 .status-all-passed, 
+.output-area h3 .status-passed,
+.output-area h3 .status-success-dummy-handler {
+    color: #155724; 
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    display: inline-block; /* To allow padding and background */
+    margin-left: 5px;
+}
+
+.output-area h3 .status-failed-tests,
+.output-area h3 .status-wrong-answer,
+.output-area h3 .status-compilation-error,
+.output-area h3 .status-runtime-error,
+.output-area h3 .status-timeout,
+.output-area h3 .status-server-error,
+.output-area h3 .status-error-no-test-results,
+.output-area h3 .status-error {
+    color: #721c24; 
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+/* Table in Output Area */
+.output-area table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    font-size: 0.9em; /* Slightly smaller font for table */
+}
+.output-area th, .output-area td {
+    border: 1px solid #dee2e6;
+    padding: 8px 10px;
+    text-align: left;
+    vertical-align: top;
+}
+.output-area th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #495057;
+}
+.output-area td pre {
+    margin: 0;
+    padding: 5px;
+    font-size: 0.95em; /* Relative to table font size */
+    max-height: 120px;
+    overflow-y: auto;
+    background-color: #f1f3f5; /* Lighter pre for table */
+    color: #212529;
+    border: 1px solid #e0e0e0;
+    border-radius: 3px;
+    white-space: pre-wrap;
+    word-break: break-all; /* For very long strings */
+}
+
+/* Status text colors within table cells */
+.output-area td.status-passed,
+.output-area td.status-dummy-passed { color: #28a745; font-weight: 500; }
+
+.output-area td.status-failed-tests,
+.output-area td.status-wrong-answer,
+.output-area td.status-compilation-error,
+.output-area td.status-runtime-error,
+.output-area td.status-timeout {
+    color: #dc3545; /* Bootstrap danger red */
+    font-weight: 500;
+}
+
+/* Code Pre Blocks (for starter code preview & model solution) - Refined Dark Theme */
+pre {
+    background: #272822;        /* Monokai-like background */
+    color: #f8f8f2;             /* Light text, typical for dark themes */
+    padding: 1em;
+    border-radius: 6px;
+    border: 1px solid #444;     /* Slightly visible border on dark themes */
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+    font-size: 0.9em;
+    line-height: 1.5;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Slightly more pronounced shadow for dark */
+}
+
+pre > code {
+    background-color: transparent !important;
+    color: inherit !important;
+    padding: 0 !important;
+    font-size: inherit !important;
+}
+
+/* Inline code (can remain light or be styled differently) */
+code.inline-code {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+    background-color: #e9ecef;
+    padding: 0.2em 0.4em;
+    margin: 0 0.1em;
+    border-radius: 3px;
+    color: #c7254e; 
+    font-size: 0.875em;
+    word-break: break-all;
+}
+
+/* Footer Styling */
+.main-content footer {
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 25px;
+    border-top: 1px solid #dee2e6;
+    color: #6c757d;
+}
+.navigation {
+    margin-top: 10px;
+}
+.navigation span {
+    margin: 0 15px;
+    font-weight: 500;
+    color: #495057;
+}
+
+/* Responsive adjustments (basic example) */
+@media (max-width: 992px) {
+    .page-container {
+        flex-direction: column; /* Stack sidebar on top for smaller screens */
+    }
+    .sidebar {
+        width: 100%;
+        height: auto; /* Allow height to adjust to content */
+        position: static; /* No longer sticky */
+        border-right: none;
+        border-bottom: 1px solid #dee2e6;
+    }
+    .main-content {
+        max-width: 100%;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content header h1 {
+        font-size: 1.6em;
+    }
+    .main-content h2 {
+        font-size: 1.3em;
+    }
+    .main-content h3 {
+        font-size: 1.1em;
+    }
+    button {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+    #code-editor-container {
+        min-height: 250px;
+    }
+}
+
+.copy-button {
+    padding: 5px 10px;
+    font-size: 0.8em;
+    background-color: #6c757d; /* A neutral grey */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.copy-button:hover {
+    background-color: #5a6268;
+}
+
+.copy-button.copied { /* Style for after copying */
+    background-color: #28a745; /* Green */
+    content: 'Copied!';
+}

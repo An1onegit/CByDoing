@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C Programming Exercises</title>
+    <!-- ACE EDITOR CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.33.0/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.33.0/mode-c_cpp.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.33.0/theme-monokai.js" type="text/javascript" charset="utf-8"></script>
+    <!-- END ACE EDITOR CDN -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="page-container">
+        <aside class="sidebar">
+            <h2>Exercises</h2>
+            <ul id="exercise-list-ul">
+                <!-- Exercise items will be populated by JavaScript -->
+            </ul>
+        </aside>
+
+        <div class="main-content">
+            <header>
+                <h1>C Programming Practice</h1>
+            </header>
+
+            <main>
+                <div class="exercise-area">
+                    <h2 id="exercise-title">Exercise Title</h2>
+                    <p id="exercise-description">Exercise description will load here.</p>
+                    <div id="starter-code-area" style="display:none;">
+                        <h3>Starter Code Snippet (for reference):</h3>
+                        <pre><code id="exercise-starter-code"></code></pre>
+                    </div>
+                </div>
+
+                <div class="coding-area">
+                    <h3>Your Solution:</h3>
+                    <div id="code-editor-container" style="height: 350px; width: 100%;"></div>
+                    
+                    <div class="editor-controls">
+                        <button id="submit-button" type="button">Run Code</button>
+                        <button id="reset-code-button" type="button">Reset Code</button>
+                        <span id="loading-spinner" style="display:none; margin-left: 10px;">⏳ Processing...</span>
+                    </div>
+                    <button id="show-solution-button" style="display:none;">Show Solution</button>
+                </div>
+
+                <div class="output-area">
+                    <h3>Output:</h3>
+                    <div id="output-display"><p>Your program's output will appear here.</p></div>
+                </div>
+                <div id="solution-display-area" style="display:none;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <h3>Model Solution:</h3>
+                        <button id="copy-solution-button" type="button" class="copy-button" title="Copy Solution Code">Copy</button>
+                    </div>
+                    <pre><code id="model-solution-code"></code></pre>
+                </div>
+            </main>
+
+            <footer>
+                <p>Tutorial Exercises</p>
+                <div class="navigation">
+                    <button id="prev-exercise" disabled>Previous</button>
+                    <span id="current-exercise-indicator">1 / N</span>
+                    <button id="next-exercise">Next</button>
+                </div>
+            </footer>
+        </div> <!-- End main-content -->
+    </div> <!-- End page-container -->
+
+    <script src="script.js"></script>
+</body>
+</html>

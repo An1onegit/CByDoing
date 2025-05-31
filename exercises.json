@@ -1,0 +1,40 @@
+[
+  {
+    "id": "ex1_first_string",
+    "title": "Exercise 1. [First bl...string]",
+    "description": "Write a program that prints out the string \"Hello world\" where this string is stored in a variable of your program.\n\nExample: The output of your program will be \"Hello world\".",
+    "starter_code": "#include <stdio.h>\n\nint main() {\n  // Your code here\n  char my_string[] = \"Hello world\";\n\n  // Print the string\n\n  return 0;\n}",
+    "test_cases": [
+      {
+        "input": "",
+        "expected_output": "Hello world\n"
+      }
+    ],
+    "model_solution": "#include <stdio.h>\n\nint main() {\n  char my_string[] = \"Hello world\";\n  printf(\"%s\\n\", my_string);\n  return 0;\n}"
+  },
+  {
+    "id": "ex2_greetings",
+    "title": "Exercise 2. [Greetings]",
+    "description": "Alice and Bob has their little habit when they chat on their favorite messaging app.\nAlice always starts a conversation with a \"he..ey\" (It's the string \"hey\" with one or more 'e' characters following) and Bob always answers with a \"he..ey\" where the number of 'e' characters is twice the number of 'e' characters in Alice's \"he..ey\".\nWrite a program that takes as input a string s of size 3 <= n <= 100 containing Alice's \"he..ey\" (we assume that the string always starts with a single 'h' followed by one or more 'e' and always ends with a single 'y'; then the program will display Bob's response).\n\nExample: For the input \"heeeey\", the output should be \"heeeeeeeey\".",
+    "starter_code": "#include <stdio.h>\n#include <string.h>\n\nint main() {\n  char alice_msg[101];\n  scanf(\"%s\", alice_msg);\n\n  // Your logic here to calculate the number of 'e's in alice_msg\n  // Remember alice_msg is like \"h\" + one or more 'e's + \"y\"\n  // The length of alice_msg is at least 3.\n  // Number of 'e's = strlen(alice_msg) - 2;\n\n  // Construct and print Bob's response\n\n  return 0;\n}",
+    "test_cases": [
+      {
+        "input": "hey",
+        "expected_output": "heey\n"
+      },
+      {
+        "input": "heey",
+        "expected_output": "heeeey\n"
+      },
+      {
+        "input": "heeeey",
+        "expected_output": "heeeeeeeey\n"
+      },
+      {
+        "input": "heeeeeeeeeey",
+        "expected_output": "heeeeeeeeeeeeeeeeeeeeey\n"
+      }
+    ],
+    "model_solution": "#include <stdio.h>\n#include <string.h>\n\nint main() {\n  char alice_msg[101];\n  scanf(\"%s\", alice_msg);\n  \n  int num_e_alice = strlen(alice_msg) - 2;\n  int num_e_bob = num_e_alice * 2;\n  \n  printf(\"h\");\n  for (int i = 0; i < num_e_bob; i++) {\n    printf(\"e\");\n  }\n  printf(\"y\\n\");\n  \n  return 0;\n}"
+  }
+]
